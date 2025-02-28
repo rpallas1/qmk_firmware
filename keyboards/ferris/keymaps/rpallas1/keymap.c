@@ -4,74 +4,194 @@
 // changed reset on line 55 to transparent TODO: need to look up what the reset key is
 
 enum tap_dance_codes {
+/*
+ * Single tap: Types a perions
+ * Hold: Types an exclamation mark
+ * Double tap: Types two periods
+ * Triple tap: Types three periods
+ */
   DANCE_1,
+
+/*
+ * Single tap: Types a comma
+ * Hold: Types a hypen/minus
+ * Double tap: Types two commas
+ * Triple tap: Types three commas
+ */
   DANCE_2,
+
+/*
+ * Single tap: Types a slash
+ * Hold: Types a dash/underscore
+ * Double tap: Types two slashes
+ * Triple tap: Types three slashes
+ */
   DANCE_3,
+
+/*
+ * Single tap: Types a space
+ * Hold: Types an underscore
+ * Double tap: Types two spaces
+ * Triple tap: Types three spaces
+ */
   DANCE_15,
+
+/*
+ * Single tap; Types a dollar sign
+ * Hold: Executes CMD+CTRL+SHIFT+4 (screenshot shortcut on Mac)
+ * Double/triple tap: Types multiple dollar signs
+ */
   DANCE_31,
+
+/*
+ * Single tap: Types a single quote
+ * Hold: Execute CMD+' (special Mac shortcut)
+ * Double tap: Types a backtick
+ * Triple tap: Types multiple single quotes
+ */
   DANCE_32,
+
+/*
+ * Single tap: Types ALT+3 (special character)
+ * Hold: Types ALT+SHIFT+2 (special character)
+ * Double/triple tap: Types the character multiple times
+ */
   DANCE_33,
+
+/*
+ * Single tap: Types Escape key
+ * Hold: ALT+CMD+ESC (force quit on Mac)
+ * Double tap: Types Escape twice
+ */
   DANCE_54,
+
+/*
+ * Single tap: Types "q"
+ * Hold: Types "h"
+ * Double/triple tap: Types "q" multiple times
+ */
   DANCE_55,
+
+
+/*
+ * Single tap: Types tab
+ * Hold: Types CMD+tab (App switcher on Mac)
+ * Double tap: Types tab twice
+ */
   DANCE_56,
+
+/*
+ * Single tap: Outputs a Delete key
+ * Hold: Outputs CTRL+K (delete line on Mac)
+ * Double tap: Outputs two Delete key presses
+ * Triple tap: Outputs three Delete key presses
+ */
   DANCE_57,
+
+/*
+ * Singe tap: Outputs a backtick/grave accent character
+ * Hold: Ouputs Command+Grave, used for switching between windows of the same application on macOS
+ * Double tap: Outputs two backtick characters
+ * Triple tap: Outputs three backtick characters
+ */
   DANCE_58,
+
+/*
+ * Single tap: Outputs a space character
+ * Hold: Outputs Command+O, opens the "Open file" dialog in most applications on macOS
+ * Double tap: Outputs two spaces
+ * Triple tap: Outputs three spaces
+ */
   DANCE_59,
+
+/*
+ * Single tap: Outputs a left arrow key press
+ * Hold: Outputs Alt+Left, in browsers, this navigates to the previous page
+ * Double tap: Outputs two left arrow key presses
+ * Triple tap: Outputs three left arrow key presses
+ */
   DANCE_60,
+
+/*
+ * Single tap: Outputs a right arrow key press, used for normal cursor navigation to the right
+ * Hold: Output CMD+RIGHT (macOS) using LGUI(KC_RIGHT), moves the cursor the the end of the current line
+ * Double tap: Outputs two right arrow key presses
+ * Triple tap: Outputs three right arrow key presses
+ * More than three taps: Outputs additional right arrow key presses
+ */
   DANCE_63,
+
+/*
+ * Single tap: Types backslash
+ * Hold: Home key (navigation to beginning)
+ * Double tap: Types backslash twice
+ */
   BKSL_HME,
+
+/*
+ * Single tap: Types pipe
+ * Hold: End key (navigation to end)
+ * Double tap: Types pipe twice
+ */
   PIPE_END,
 };
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = LAYOUT(
-  //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-      KC_Y,   KC_C,     KC_L,     KC_M,    KC_K,    						KC_Z,   KC_F,   KC_U,   TD(DANCE_2),  KC_BSPC,
-  //------------------------------------------------------------------------------       ----------------------------------------------------------------------------
-      KC_I,    KC_S,    MT(MOD_LALT,KC_R),    MT(MOD_LGUI,KC_T),    KC_G,  	KC_P,   MT(MOD_RGUI,KC_N),   MT(MOD_RALT,KC_E),  KC_A,  KC_O,
-  //------------------------------------------------------------------------------       ----------------------------------------------------------------------------
-      KC_Q,   KC_V,  KC_W,   KC_D,  KC_J,     							KC_B,   KC_H,   TD(DANCE_3),   TD(DANCE_1),   KC_X,
-  //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-		    					MT(MOD_MEH,KC_SPACE),OSM(MOD_LSFT),      OSM(MOD_RCTL), TO(1)
-  //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-  ),
-
-  [1] = LAYOUT(
-  //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-    KC_ESCAPE,KC_AT    ,LSFT(KC_3)     ,TD(DANCE_31)     ,KC_PERC    ,KC_CIRC    ,KC_AMPR   ,KC_ASTR   ,KC_SCLN   ,KC_BSPC ,
-  //----------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-    KC_TAB,KC_EQL    ,LALT(KC_RBRC)    ,LALT(LSFT(KC_RBRC))    ,TD(DANCE_32)    ,TD(BKSL_HME),LSFT(KC_LBRC),LSFT(KC_RBRC),TD(PIPE_END),KC_ENTER   ,
-  //----------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-    KC_TILD, TD(DANCE_33)   ,LALT(KC_LBRC)   ,LALT(LSFT(KC_LBRC))   ,KC_DQUO   ,KC_LBRC     ,KC_LPRN   ,KC_RPRN   ,KC_RBRC   ,TO(3)   ,
-  //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-		    					TO(0) ,OSM(MOD_LSFT),KC_RALT      ,TO(2)
-  ),
-
-  [2] = LAYOUT(
-  //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-   KC_ESCAPE,      KC_MEDIA_PLAY_PAUSE,KC_MEDIA_PREV_TRACK,KC_MEDIA_NEXT_TRACK,LSFT(KC_MINS),KC_MINS,   KC_7,  KC_8, KC_9,KC_TRANSPARENT,
-  //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-    KC_TAB,  KC_TRANSPARENT, KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,LSFT(KC_EQL),   KC_EQL,   KC_4, KC_5, KC_6,   KC_ENTER,
-  //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-    KC_TRANSPARENT,   KC_KP_ASTERISK, KC_BRIGHTNESS_DOWN,KC_BRIGHTNESS_UP,KC_KP_DOT,   KC_0,   KC_1, KC_2, KC_3,   KC_TRANSPARENT,
-  //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-	  TO(0), KC_LGUI,KC_RALT ,TO(2)
-  ),
-
-  [3] = LAYOUT(
-      TD(DANCE_54),   KC_MS_WH_LEFT,  KC_MS_UP,       KC_MS_WH_RIGHT, TD(DANCE_55), LGUI(KC_LBRC),LCTL(LSFT(KC_TAB)),RCTL(KC_TAB),   LGUI(KC_RBRC),KC_TRANSPARENT,
-  //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-	     TD(DANCE_56),   KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    MT(MOD_LGUI,KC_DEL),    TD(DANCE_60),   MT(MOD_RGUI,KC_DOWN), MT(MOD_RALT,KC_UP),   TD(DANCE_63),   KC_ENTER,
-  //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-     TD(DANCE_58),   KC_MS_BTN2,     KC_MS_WH_UP,    KC_MS_WH_DOWN, KC_TRANSPARENT, KC_MS_BTN1,     KC_MS_ACCEL0,   KC_MS_ACCEL1,   KC_MS_ACCEL2,   KC_NO,
-  //---------------------------------------------------------------------------------------       ----------------------------------------------------------------------------------
-                        TO(0),KC_TRANSPARENT,KC_RALT,                                   TO(1)
-  )
+enum layers {
+  _QWERTY,
+  _SYMBOLS,
+  _MEDIA_NUMBERS,
+  _MOUSE,
 };
 
+/*
+ * Other methods
+ * - MT(modifier, key): Momentary toggle, holds the modifier while the key is pressed
+ * - OSM(modifier): One shot modifier, holds the modifier until the next key is pressed
+ * - TO(layer): Toggle to layer
+ */
 
+// 3x5_2 Layout
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  [_QWERTY] = LAYOUT(
+      KC_Q, KC_W, KC_F, KC_P, KC_B, /*|----|*/ KC_J, KC_L, KC_U, TD(DANCE_2), KC_BSPC,
+// -------
+      KC_I, KC_S, MT(MOD_LALT, KC_R), MT(MOD_LGUI, KC_T), KC_G,/*|----|*/ KC_P, MT(MOD_RGUI, KC_N), MT(MOD_RALT, KC_E), KC_A, KC_O,
+// -------
+      KC_Q, KC_V, KC_W, KC_D, KC_J, /*|----|*/ KC_B, KC_H, TD(DANCE_3), TD(DANCE_1), KC_X,
+// -------
+	            MT(MOD_MEH, KC_SPACE), OSM(MOD_LSFT), /*|----|*/ OSM(MOD_RCTL), TO(1)
+  ),
 
+  [_SYMBOLS] = LAYOUT(
+    KC_ESCAPE, KC_AT, LSFT(KC_3), TD(DANCE_31), KC_PERC, /*|----|*/ KC_CIRC, KC_AMPR, KC_ASTR, KC_COLN, KC_BSPC,
+// -------
+    KC_TAB, KC_EQL, LALT(KC_RBRC), LALT(LSFT(KC_RBRC)), TD(DANCE_32), TD(BKSL_HME), /*|----|*/ LSFT(KC_LBRC), LSFT(KC_RBRC), TD(PIPE_END), KC_ENTER,
+// -------
+    KC_TILD, TD(DANCE_33), LALT(KC_LBRC), LALT(LSFT(KC_LBRC)), KC_DQUO, /*|----|*/ KC_LBRC, KC_LPRN, KC_RPRN, KC_RBRC, TO(3),
+// -------
+                                                TO(0), OSM(MOD_LSFT), /*|----|*/ KC_RALT, TO(2)
+  ),
 
+  [_MEDIA_NUMBERS] = LAYOUT(
+   KC_ESCAPE, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_PREV_TRACK, KC_MEDIA_NEXT_TRACK, LSFT(KC_MINS), /*|----|*/ KC_MINS, KC_7, KC_8, KC_9, KC_TRANSPARENT,
+// -------
+    KC_TAB, KC_TRANSPARENT, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, LSFT(KC_EQL), /*|----|*/ KC_EQL, KC_4, KC_5, KC_6, KC_ENTER,
+// -------
+    KC_TRANSPARENT, KC_KP_ASTERISK, KC_BRIGHTNESS_DOWN, KC_BRIGHTNESS_UP, KC_KP_DOT, /*|----|*/ KC_0, KC_1, KC_2, KC_3, KC_TRANSPARENT,
+// -------
+	                                        TO(0), KC_LGUI, /*|----|*/ KC_RALT, TO(2)
+  ),
+
+  [_MOUSE] = LAYOUT(
+      TD(DANCE_54), KC_MS_WH_LEFT, KC_MS_UP, KC_MS_WH_RIGHT, TD(DANCE_55), /*|----|*/ LGUI(KC_LBRC), LCTL(LSFT(KC_TAB)), RCTL(KC_TAB), LGUI(KC_RBRC), KC_TRANSPARENT,
+// -------
+	     TD(DANCE_56), KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, MT(MOD_LGUI, KC_DEL), /*|----|*/ TD(DANCE_60), MT(MOD_RGUI, KC_DOWN), MT(MOD_RALT, KC_UP), TD(DANCE_63), KC_ENTER,
+// -------
+     TD(DANCE_58), KC_MS_BTN2, KC_MS_WH_UP, KC_MS_WH_DOWN, KC_TRANSPARENT, /*|----|*/ KC_MS_BTN1, KC_MS_ACCEL0, KC_MS_ACCEL1, KC_MS_ACCEL2, KC_NO,
+// -------
+                        TO(0), KC_TRANSPARENT, /*|----|*/ KC_RALT, TO(1)
+  )
+};
 
 extern bool g_suspend_state;
 #define GET_TAP_KC(dual_role_key) dual_role_key & 0xFF
@@ -744,7 +864,7 @@ void dance_60_finished(tap_dance_state_t *state, void *user_data) {
     dance_state.step = dance_60_dance_step(state);
     switch (dance_state.step) {
         case SINGLE_TAP: register_code16(KC_LEFT); break;
-        case SINGLE_HOLD: register_code16(LALT(KC_LEFT)); break;
+        case SINGLE_HOLD: register_code16(LGUI(KC_LEFT)); break;
         case DOUBLE_TAP: register_code16(KC_LEFT); register_code16(KC_LEFT); break;
         case DOUBLE_SINGLE_TAP: tap_code16(KC_LEFT); register_code16(KC_LEFT);
     }
@@ -801,7 +921,8 @@ void dance_63_reset(tap_dance_state_t *state, void *user_data) {
     wait_ms(10);
     switch (dance_state.step) {
         case SINGLE_TAP: unregister_code16(KC_RIGHT); break;
-        case SINGLE_HOLD: unregister_code16(LALT(KC_RIGHT)); break;
+        /* case SINGLE_HOLD: unregister_code16(LALT(KC_RIGHT)); break; */
+        case SINGLE_HOLD: unregister_code16(LGUI(KC_RIGHT)); break;
         case DOUBLE_TAP: unregister_code16(KC_RIGHT); break;
         case DOUBLE_SINGLE_TAP: unregister_code16(KC_RIGHT); break;
     }
