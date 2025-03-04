@@ -1,11 +1,19 @@
 #include QMK_KEYBOARD_H
 
+// MacOS macros
 #define SC_SHOT SGUI(KC_4)
 #define SC_SHOT_APP SGUI(KC_5)
+#define SPTL LGUI(KC_SPACE)
+
+// Browser navigation
+#define TAB_R LCTL(KC_TAB)
+#define TAB_L LCTL(LSFT(KC_TAB))
+#define BR_BACK LGUI(KC_LEFT)
+#define BR_FWD LGUI(KC_RIGHT)
 
 enum tap_dance_codes {
 /*
- * Single tap: Types a perions
+ * Single tap: Types a period
  * Hold: Types an exclamation mark
  * Double tap: Types two periods
  * Triple tap: Types three periods
@@ -182,27 +190,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // -------
       KC_A, KC_R, MT(MOD_LALT, KC_S), MT(MOD_LGUI, KC_T), KC_G,/*|----|*/ KC_M, MT(MOD_RGUI, KC_N), MT(MOD_RALT, KC_E), KC_I, KC_O,
 // -------
-      KC_Z, KC_X, KC_C, KC_D, KC_V, /*|----|*/ KC_K, KC_H, TD(DANCE_3), TD(DANCE_1), TD(DANCE_2),
+      KC_Z, KC_X, KC_C, KC_D, KC_V, /*|----|*/ KC_K, KC_H, TD(DANCE_3), TD(DANCE_2), TD(DANCE_1),
 // -------
 	            MT(MOD_HYPR, KC_SPACE), OSM(MOD_LSFT), /*|----|*/ OSM(MOD_RCTL), TO(SYM)
   ),
 
-    /*
-     * LALT(KC_RBRC) - Remove?
-     * LALT(LSFT(KC_RBRC)) - Remove?
-     * LALT(KC_LBRC) - Remove?
-     * LALT(LSFT(KC_LBRC)) - Remove?
-     *
-     * 4 free keys
-     */
   [SYM] = LAYOUT(
-    KC_ESC, KC_AT, LSFT(KC_3), TD(DANCE_31), TD(DANCE_33), /*|----|*/ KC_CIRC, KC_AMPR, KC_ASTR, KC_COLN, KC_BSPC,
+    KC_ESC, KC_AT, KC_DLR, KC_PERC, KC_HASH, /*|----|*/ KC_CIRC, KC_AMPR, KC_ASTR, KC_COLN, KC_BSPC,
 // -------
-    KC_TAB, KC_EQL, LALT(KC_RBRC), LALT(LSFT(KC_RBRC)), TD(DANCE_32), /*|----|*/ TD(BKSL_HME), LSFT(KC_LBRC), LSFT(KC_RBRC), TD(PIPE_END), KC_ENTER,
+    KC_TAB, OSM(MOD_LGUI), KC_DQUO, KC_EQL, KC_GRAVE, /*|----|*/ KC_BSLS, KC_LCBR, KC_RCBR, KC_PIPE, KC_ENTER,
 // -------
-    KC_TILD, KC_SCLN, LALT(KC_LBRC), LALT(LSFT(KC_LBRC)), KC_DQUO, /*|----|*/ KC_LBRC, KC_LPRN, KC_RPRN, KC_RBRC, TO(NAV),
+    KC_TILD, KC_PLUS, KC_QUOTE, KC_SCLN, KC_CAPS, /*|----|*/ KC_LBRC, KC_LPRN, KC_RPRN, KC_RBRC, TO(NAV),
 // -------
-                                                TO(BASE), OSM(MOD_LSFT), /*|----|*/ KC_RALT, TO(NUM)
+                                TO(BASE), OSM(MOD_LSFT), /*|----|*/ KC_RALT, TO(NUM)
   ),
 
   [NUM] = LAYOUT(
@@ -216,28 +216,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
     [NAV] = LAYOUT(
-        LGUI(KC_TAB), LGUI(KC_SPACE), LCTL(LSFT(KC_TAB)), LCTL(KC_TAB), XXXXXXX,  /*|----|*/ XXXXXXX, KC_WH_U, KC_WH_D, XXXXXXX, KC_BSPC,
+        LGUI(KC_TAB), SPTL, TAB_L, TAB_R, XXXXXXX,  /*|----|*/ XXXXXXX, KC_WH_U, KC_WH_D, XXXXXXX, KC_BSPC,
 // ------
-        OSM(MOD_LSFT), OSM(MOD_LALT), OSM(MOD_LCTL), OSM(MOD_LGUI), XXXXXXX, /*|----|*/ KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_ENTER,
+        OSM(MOD_LSFT), OSM(MOD_LCTL), OSM(MOD_LALT), OSM(MOD_LGUI), XXXXXXX, /*|----|*/ KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_ENTER,
 // ------
-        LGUI(KC_GRAVE), LGUI(LSFT(KC_5)), LGUI(KC_LEFT), LGUI(KC_RIGHT), XXXXXXX, /*|----|*/ KC_HOME, XXXXXXX, XXXXXXX, KC_END, TO(OTHER),
+        LGUI(KC_GRAVE), XXXXXXX, BR_BACK, BR_FWD, XXXXXXX, /*|----|*/ KC_HOME, XXXXXXX, XXXXXXX, KC_END, TO(OTHER),
 // ------
                                             TO(BASE), KC_TAB, /*|----|*/ KC_RALT, TO(NUM)
     ),
 
-    /*
-     * Changes
-     * - Don't use the mouse keys? Or layer 4
-     *   - Replace with Function keys (1-12)
-     *   - Need GUI, Control, Shift and Options + arrows for window management
-     *      - Could put all four as mod-tap on the home row but would have to move mouse controls
-     *
-     * LGUI(KC_LBRC) - go back (browser)
-     * LCTL(LSFT(KC_TAB)) - previous tab (browser)
-     * RCTL(KC_TAB) - next tab (browser)
-     * LGUI(KC_RBRC) - go foward (browser)
-     *
-     */
+    // ---- REFERENCE ----
   [5] = LAYOUT(
     TD(DANCE_54), KC_MS_WH_LEFT, KC_MS_UP, KC_MS_WH_RIGHT, TD(DANCE_55), /*|----|*/ LGUI(KC_LBRC), LCTL(LSFT(KC_TAB)), RCTL(KC_TAB), LGUI(KC_RBRC), KC_TRANSPARENT,
 // -------
@@ -245,16 +233,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // -------
     TD(DANCE_58), KC_MS_BTN2, KC_MS_WH_UP, KC_MS_WH_DOWN, KC_TRANSPARENT, /*|----|*/ KC_MS_BTN1, KC_MS_ACCEL0, KC_MS_ACCEL1, KC_MS_ACCEL2, TO(OTHER),
 // -------
-                        TO(BASE), KC_TRANSPARENT, /*|----|*/ KC_RALT, TO(SYM)
+                        TO(BASE), KC_LGUI, /*|----|*/ KC_RALT, TO(SYM)
   ),
 
     /*
-     * Only able to get to this layer from layer 3
+     * Only able to get to this layer from NAV (third) layer
      * Sleep/Lock computer
      * Toggle Combo mode
      * Reboot/booload keyboard
-     *
-     * - Maybe put arrows and modifier keys for window management
      */
    [OTHER] = LAYOUT(
         QK_RBT, QK_BOOT, XXXXXXX, QK_MAKE, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, CM_TOGG, KC_SLEP,
@@ -317,6 +303,55 @@ static tap dance_state = {
     .is_press_action = true,
     .step = 0
 };
+
+void on_dance_1(tap_dance_state_t *state, void *user_data);
+uint8_t dance_1_dance_step(tap_dance_state_t *state);
+void dance_1_finished(tap_dance_state_t *state, void *user_data);
+void dance_1_reset(tap_dance_state_t *state, void *user_data);
+
+void on_dance_1(tap_dance_state_t *state, void *user_data) {
+	if(state->count == 3) {
+		tap_code16(KC_DOT);
+		tap_code16(KC_DOT);
+		tap_code16(KC_DOT);
+	}
+	if(state->count > 3) {
+		tap_code16(KC_DOT);
+	}
+}
+
+uint8_t dance_1_dance_step(tap_dance_state_t *state) {
+	if (state->count == 1) {
+		if (state->interrupted || !state->pressed) return SINGLE_TAP;
+		else return SINGLE_HOLD;
+	} else if (state->count == 2) {
+		if (state->interrupted) return DOUBLE_SINGLE_TAP;
+		else if (state->pressed) return DOUBLE_HOLD;
+		else return DOUBLE_TAP;
+	}
+	return MORE_TAPS;
+}
+
+void dance_1_finished(tap_dance_state_t *state, void *user_data) {
+	dance_state.step = dance_1_dance_step(state);
+	switch (dance_state.step) {
+		case SINGLE_TAP: register_code16(KC_DOT); break;
+		case SINGLE_HOLD: register_code16(KC_EXLM); break;
+		case DOUBLE_TAP: register_code16(KC_DOT); register_code16(KC_DOT); break;
+		case DOUBLE_SINGLE_TAP: tap_code16(KC_DOT); register_code16(KC_DOT); break;
+	}
+}
+
+void dance_1_reset(tap_dance_state_t *state, void *user_data) {
+	wait_ms(10);
+	switch (dance_state.step) {
+		case SINGLE_TAP: unregister_code16(KC_DOT); break;
+		case SINGLE_HOLD: unregister_code16(KC_EXLM); break;
+		case DOUBLE_TAP: unregister_code16(KC_DOT); break;
+		case DOUBLE_SINGLE_TAP: unregister_code16(KC_DOT); break;
+	}
+	dance_state.step = 0;
+}
 
 void on_dance_2(tap_dance_state_t *state, void *user_data);
 uint8_t dance_2_dance_step(tap_dance_state_t *state);
@@ -416,54 +451,6 @@ void dance_3_reset(tap_dance_state_t *state, void *user_data) {
 	dance_state.step = 0;
 }
 
-void on_dance_1(tap_dance_state_t *state, void *user_data);
-uint8_t dance_1_dance_step(tap_dance_state_t *state);
-void dance_1_finished(tap_dance_state_t *state, void *user_data);
-void dance_1_reset(tap_dance_state_t *state, void *user_data);
-
-void on_dance_1(tap_dance_state_t *state, void *user_data) {
-	if(state->count == 3) {
-		tap_code16(KC_DOT);
-		tap_code16(KC_DOT);
-		tap_code16(KC_DOT);
-	}
-	if(state->count > 3) {
-		tap_code16(KC_DOT);
-	}
-}
-
-uint8_t dance_1_dance_step(tap_dance_state_t *state) {
-	if (state->count == 1) {
-		if (state->interrupted || !state->pressed) return SINGLE_TAP;
-		else return SINGLE_HOLD;
-	} else if (state->count == 2) {
-		if (state->interrupted) return DOUBLE_SINGLE_TAP;
-		else if (state->pressed) return DOUBLE_HOLD;
-		else return DOUBLE_TAP;
-	}
-	return MORE_TAPS;
-}
-
-void dance_1_finished(tap_dance_state_t *state, void *user_data) {
-	dance_state.step = dance_1_dance_step(state);
-	switch (dance_state.step) {
-		case SINGLE_TAP: register_code16(KC_DOT); break;
-		case SINGLE_HOLD: register_code16(KC_EXLM); break;
-		case DOUBLE_TAP: register_code16(KC_DOT); register_code16(KC_DOT); break;
-		case DOUBLE_SINGLE_TAP: tap_code16(KC_DOT); register_code16(KC_DOT); break;
-	}
-}
-
-void dance_1_reset(tap_dance_state_t *state, void *user_data) {
-	wait_ms(10);
-	switch (dance_state.step) {
-		case SINGLE_TAP: unregister_code16(KC_DOT); break;
-		case SINGLE_HOLD: unregister_code16(KC_EXLM); break;
-		case DOUBLE_TAP: unregister_code16(KC_DOT); break;
-		case DOUBLE_SINGLE_TAP: unregister_code16(KC_DOT); break;
-	}
-	dance_state.step = 0;
-}
 
 void on_dance_15(tap_dance_state_t *state, void *user_data);
 uint8_t dance_15_dance_step(tap_dance_state_t *state);
