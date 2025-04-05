@@ -184,33 +184,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                     // -------
                     KC_A, KC_R, MT(MOD_LALT, KC_S), MT(MOD_LGUI, KC_T), KC_G, /*|----|*/ KC_M, MT(MOD_RGUI, KC_N), MT(MOD_RALT, KC_E), KC_I, KC_O,
                     // -------
-                    KC_Z, KC_X, KC_C, KC_D, KC_V, /*|----|*/ KC_K, KC_H, TD(DANCE_3), TD(DANCE_2), TD(DANCE_1),
+                    KC_Z, KC_X, KC_C, KC_D, KC_V, /*|----|*/ KC_K, KC_H, TD(DANCE_2), TD(DANCE_1), TD(DANCE_3),
                     // -------
-                    MT(MOD_HYPR, KC_SPACE), OSM(MOD_LSFT), /*|----|*/ OSM(MOD_RCTL), TO(SYM)),
+                    MT(MOD_HYPR, KC_SPACE), OSM(MOD_RCTL), /*|----|*/ OSM(MOD_LSFT), TO(SYM)),
 
-    [SYM] = LAYOUT(KC_ESC, KC_AT, KC_DLR, KC_PERC, KC_HASH, /*|----|*/ KC_CIRC, KC_AMPR, KC_ASTR, KC_COLN, KC_BSPC,
+    [SYM] = LAYOUT(KC_ESC, KC_DLR, KC_PERC, KC_PLUS, KC_HASH, /*|----|*/ KC_CIRC, KC_EXLM, KC_AMPR, KC_PIPE, KC_BSPC,
                    // -------
-                   KC_TAB, OSM(MOD_LGUI), KC_DQUO, KC_EQL, KC_GRAVE, /*|----|*/ KC_BSLS, KC_LCBR, KC_RCBR, KC_PIPE, KC_ENTER,
+                   KC_TAB, KC_MINS, MT(MOD_LALT, KC_EQL), MT(MOD_LGUI, KC_DQUO), KC_GRAVE, /*|----|*/ KC_BSLS, KC_LCBR, KC_RCBR, KC_ASTR, KC_ENTER,
                    // -------
-                   KC_TILD, KC_PLUS, KC_QUOTE, KC_SCLN, KC_CAPS, /*|----|*/ KC_LBRC, KC_LPRN, KC_RPRN, KC_RBRC, TO(NAV),
+                   KC_CAPS, KC_SCLN, KC_COLN, KC_QUOTE, KC_AT, /*|----|*/ KC_LBRC, KC_LPRN, KC_RPRN, KC_RBRC, TO(NAV),
                    // -------
-                   TO(BASE), OSM(MOD_LSFT), /*|----|*/ KC_RALT, TO(NUM)),
+                   TO(BASE), MT(MOD_HYPR, KC_SPACE), /*|----|*/ OSM(MOD_LSFT), TO(NUM)),
 
-    [NUM] = LAYOUT(KC_ESC, KC_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, TD(SCRN_SHOT), /*|----|*/ KC_PERC, KC_7, KC_8, KC_9, KC_BSPC,
+    [NUM] = LAYOUT(KC_ESC, KC_BRID, KC_BRIU, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, /*|----|*/ KC_PERC, KC_7, KC_8, KC_9, KC_BSPC,
                    // -------
                    KC_TAB, KC_MEDIA_PLAY_PAUSE, KC_PLUS, KC_MINS, KC_DOT, /*|----|*/ KC_EQL, KC_4, KC_5, KC_6, KC_ENTER,
                    // -------
-                   TD(PREV_NEXT), KC_BRID, KC_BRIU, KC_ASTR, KC_SLSH, /*|----|*/ KC_0, KC_1, KC_2, KC_3, TO(NAV),
+                   TD(PREV_NEXT), KC_MUTE, KC_ASTR, KC_SLSH, TD(SCRN_SHOT), /*|----|*/ KC_0, KC_1, KC_2, KC_3, TO(NAV),
                    // -------
-                   TO(BASE), KC_LGUI, /*|----|*/ KC_RALT, TO(SYM)),
+                   TO(BASE), MT(MOD_HYPR, KC_SPACE), /*|----|*/ OSM(MOD_LSFT), TO(SYM)),
 
-    [NAV] = LAYOUT(APP_SWITCH, SPTL, TAB_L, TAB_R, XXXXXXX, /*|----|*/ XXXXXXX, KC_WH_U, KC_WH_D, XXXXXXX, KC_BSPC,
+    [NAV] = LAYOUT(BR_BACK, BR_FWD, TAB_L, TAB_R, XXXXXXX, /*|----|*/ XXXXXXX, KC_WH_U, KC_WH_D, XXXXXXX, KC_BSPC,
                    // ------
                    OSM(MOD_LSFT), OSM(MOD_LCTL), OSM(MOD_LALT), OSM(MOD_LGUI), XXXXXXX, /*|----|*/ KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_ENTER,
                    // ------
-                   WINDOW_SWITCH, XXXXXXX, BR_BACK, BR_FWD, XXXXXXX, /*|----|*/ KC_HOME, XXXXXXX, XXXXXXX, KC_END, MO(OTHER),
+                   XXXXXXX, WINDOW_SWITCH, APP_SWITCH, SPTL, XXXXXXX, /*|----|*/ KC_HOME, XXXXXXX, XXXXXXX, KC_END, MO(OTHER),
                    // ------
-                   TO(BASE), KC_TAB, /*|----|*/ KC_RALT, TO(NUM)),
+                   TO(BASE), MT(MOD_HYPR, KC_SPACE), /*|----|*/ KC_TAB, TO(NUM)),
 
     // ---- REFERENCE ----
     [5] = LAYOUT(TD(DANCE_54), KC_MS_WH_LEFT, KC_MS_UP, KC_MS_WH_RIGHT, TD(DANCE_55), /*|----|*/ LGUI(KC_LBRC), LCTL(LSFT(KC_TAB)), RCTL(KC_TAB), LGUI(KC_RBRC), KC_TRANSPARENT,
@@ -227,13 +227,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * Toggle Combo mode
      * Reboot/booload keyboard
      */
-    [OTHER] = LAYOUT(QK_RBT, QK_BOOT, XXXXXXX, QK_MAKE, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, CM_TOGG, KC_SLEP,
+    [OTHER] = LAYOUT(QK_RBT, QK_BOOT, XXXXXXX, QK_MAKE, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                     // -------
+                     XXXXXXX, XXXXXXX, CM_TOGG, KC_SLEP, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                      // -------
                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                      // -------
-                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                     // -------
-                     TO(BASE), XXXXXXX, /*|----|*/ XXXXXXX, TO(SYM))};
+                     TO(BASE), OSM(MOD_LSFT), /*|----|*/ OSM(MOD_RCTL), TO(SYM))};
 
 // ----- Combos -----
 const uint16_t PROGMEM lu_combo[] = {KC_L, KC_U, COMBO_END};
