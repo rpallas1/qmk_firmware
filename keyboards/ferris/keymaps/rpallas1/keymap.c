@@ -4,8 +4,6 @@
 // MacOS macros
 #define SC_SHOT SGUI(KC_4)
 #define SC_SHOT_APP SGUI(KC_5)
-#define SPTL LGUI(KC_SPACE)
-#define APP_SWITCH LGUI(KC_TAB)
 #define WINDOW_SWITCH LGUI(KC_GRAVE)
 
 // Browser navigation
@@ -61,7 +59,7 @@ enum layers {
     OTHER,
 };
 
-enum combos { LU_ESC, FP_WRITE, CD_COLON };
+enum combos { LU_ESC, FP_WRITE, CD_COLON, IO_ENTER };
 
 enum custom_keycodes { VIM_SAVE = SAFE_RANGE };
 
@@ -85,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [SYM] = LAYOUT(KC_ESC, KC_DLR, KC_PERC, KC_PLUS, KC_HASH, /*|----|*/ KC_CIRC, KC_EXLM, KC_AMPR, KC_PIPE, KC_BSPC,
                    // -------
-                   KC_TAB, KC_MINS, MT(MOD_LALT, KC_EQL), MT(MOD_LGUI, KC_DQUO), KC_GRAVE, /*|----|*/ KC_BSLS, KC_LCBR, KC_RCBR, KC_ASTR, KC_ENTER,
+                   KC_TAB, KC_MINS, MT(MOD_LALT, KC_EQL), LGUI_T(KC_DQUO), KC_GRAVE, /*|----|*/ KC_BSLS, KC_LCBR, KC_RCBR, KC_ASTR, KC_ENTER,
                    // -------
                    KC_CAPS, KC_SCLN, KC_COLN, KC_QUOTE, KC_AT, /*|----|*/ KC_LBRC, KC_LPRN, KC_RPRN, KC_RBRC, TO(NAV),
                    // -------
@@ -93,17 +91,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [NUM] = LAYOUT(KC_ESC, KC_BRID, KC_BRIU, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, /*|----|*/ KC_PERC, KC_7, KC_8, KC_9, KC_BSPC,
                    // -------
-                   KC_TAB, KC_MEDIA_PLAY_PAUSE, KC_PLUS, KC_MINS, KC_DOT, /*|----|*/ KC_EQL, KC_4, KC_5, KC_6, KC_ENTER,
+                   KC_TAB, KC_MEDIA_PLAY_PAUSE, MT(MOD_LALT, KC_PLUS), MT(MOD_LGUI, KC_MINS), KC_DOT, /*|----|*/ KC_EQL, KC_4, KC_5, KC_6, KC_ENTER,
                    // -------
                    TD(PREV_NEXT), KC_MUTE, KC_ASTR, KC_SLSH, TD(SCRN_SHOT), /*|----|*/ KC_0, KC_1, KC_2, KC_3, TO(NAV),
                    // -------
                    TO(BASE), KC_SPACE, /*|----|*/ OSM(MOD_LSFT), TO(SYM)),
 
-    [NAV] = LAYOUT(BR_BACK, BR_FWD, TAB_L, TAB_R, XXXXXXX, /*|----|*/ XXXXXXX, KC_WH_U, KC_WH_D, XXXXXXX, KC_BSPC,
+    [NAV] = LAYOUT(BR_BACK, BR_FWD, TAB_L, TAB_R, XXXXXXX, /*|----|*/ XXXXXXX, KC_WH_D, KC_WH_U, XXXXXXX, KC_BSPC,
                    // ------
                    OSM(MOD_LSFT), OSM(MOD_LCTL), OSM(MOD_LALT), OSM(MOD_LGUI), XXXXXXX, /*|----|*/ KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_ENTER,
                    // ------
-                   XXXXXXX, WINDOW_SWITCH, APP_SWITCH, SPTL, TD(SCRN_SHOT), /*|----|*/ KC_HOME, XXXXXXX, XXXXXXX, KC_END, MO(OTHER),
+                   XXXXXXX, WINDOW_SWITCH, XXXXXXX, XXXXXXX, TD(SCRN_SHOT), /*|----|*/ KC_HOME, XXXXXXX, XXXXXXX, KC_END, MO(OTHER),
                    // ------
                    TO(BASE), KC_SPACE, /*|----|*/ KC_TAB, TO(NUM)),
 
@@ -115,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      */
     [OTHER] = LAYOUT(QK_RBT, QK_BOOT, XXXXXXX, QK_MAKE, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                      // -------
-                     XXXXXXX, XXXXXXX, CM_TOGG, KC_F11, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                     XXXXXXX, XXXXXXX, CM_TOGG, XXXXXXX, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                      // -------
                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                      // -------
@@ -125,11 +123,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t PROGMEM lu_combo[] = {KC_L, KC_U, COMBO_END};
 const uint16_t PROGMEM fp_combo[] = {KC_F, KC_P, COMBO_END};
 const uint16_t PROGMEM cd_combo[] = {KC_C, KC_D, COMBO_END};
+const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
 
 combo_t key_combos[] = {
     [LU_ESC]   = COMBO(lu_combo, KC_ESCAPE),
     [FP_WRITE] = COMBO(fp_combo, VIM_SAVE),
     [CD_COLON] = COMBO(cd_combo, KC_COLN),
+    [IO_ENTER] = COMBO(io_combo, KC_ENTER),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -139,12 +139,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(KC_COLON);
                 tap_code16(KC_W);
                 tap_code16(KC_ENTER);
+                return false; // Skip all further processing of this key
             }
-
-            return false; // Skip all further processing of this key
+            break;
+        case LGUI_T(KC_DQUO):
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(KC_DQUO);
+                return false;
+            }
+            break;
+        case LALT_T(KC_EQL):
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(KC_EQL);
+                return false;
+            }
+            break;
         default:
             return true; // Process all other keycodes normally
     }
+
+    return true;
 }
 
 // ----- Tap Dance -----
