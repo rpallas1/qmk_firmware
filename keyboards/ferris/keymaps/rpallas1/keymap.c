@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                    // -------
                    KC_TAB, KC_MEDIA_PLAY_PAUSE, MT(MOD_LALT, KC_PLUS), MT(MOD_LGUI, KC_MINS), KC_DOT, /*|----|*/ KC_EQL, KC_4, KC_5, KC_6, KC_ENTER,
                    // -------
-                   TD(PREV_NEXT), KC_MUTE, KC_ASTR, KC_SLSH, TD(SCRN_SHOT), /*|----|*/ KC_0, KC_1, KC_2, KC_3, TO(NAV),
+                   TD(PREV_NEXT), KC_MUTE, KC_ASTR, KC_SLSH, SC_SHOT_APP, /*|----|*/ KC_0, KC_1, KC_2, KC_3, TO(NAV),
                    // -------
                    TO(BASE), KC_SPACE, /*|----|*/ OSM(MOD_LSFT), TO(SYM)),
 
@@ -101,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                    // ------
                    OSM(MOD_LSFT), OSM(MOD_LCTL), OSM(MOD_LALT), OSM(MOD_LGUI), XXXXXXX, /*|----|*/ KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_ENTER,
                    // ------
-                   XXXXXXX, WINDOW_SWITCH, XXXXXXX, XXXXXXX, TD(SCRN_SHOT), /*|----|*/ KC_HOME, XXXXXXX, XXXXXXX, KC_END, MO(OTHER),
+                   XXXXXXX, WINDOW_SWITCH, XXXXXXX, XXXXXXX, SC_SHOT_APP, /*|----|*/ KC_HOME, XXXXXXX, XXXXXXX, KC_END, MO(OTHER),
                    // ------
                    TO(BASE), KC_SPACE, /*|----|*/ KC_TAB, TO(NUM)),
 
@@ -145,12 +145,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case LGUI_T(KC_DQUO):
             if (record->tap.count && record->event.pressed) {
                 tap_code16(KC_DQUO);
-                return false;
-            }
-            break;
-        case LALT_T(KC_EQL):
-            if (record->tap.count && record->event.pressed) {
-                tap_code16(KC_EQL);
                 return false;
             }
             break;
