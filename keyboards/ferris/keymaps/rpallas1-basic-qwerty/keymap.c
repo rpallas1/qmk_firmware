@@ -6,4 +6,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[0] = LAYOUT(KC_Q,
                                                                            // -------
                                                                            KC_Z, KC_X, KC_C, KC_V, KC_B, /*|----|*/ KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH,
                                                                            // -------
-                                                                           KC_SPC, OSM(MOD_LSFT), /*|----|*/ KC_BSPC, KC_TAB)};
+                                                                           KC_SPC, MO(1), /*|----|*/ OSM(MOD_LSFT), KC_BSPC),
+
+                                                              [1] = LAYOUT(XXXXXXX, QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                                                                           // -------
+                                                                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                                                                           // -------
+                                                                           XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                                                                           // -------
+                                                                           TO(0), XXXXXXX, /*|----|*/ OSM(MOD_LSFT), KC_BSPC)};

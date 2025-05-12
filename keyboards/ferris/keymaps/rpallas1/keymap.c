@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include "config.h"
 #include QMK_KEYBOARD_H
 
 // MacOS macros
@@ -59,7 +60,7 @@ enum layers {
     OTHER,
 };
 
-enum combos { LU_ESC, FP_WRITE, CD_COLON, IO_ENTER };
+enum combos { LU_COLON, FP_WRITE, CD_TAB };
 
 enum custom_keycodes { VIM_SAVE = SAFE_RANGE };
 
@@ -79,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                     // -------
                     KC_Z, KC_X, KC_C, KC_D, KC_V, /*|----|*/ KC_K, KC_H, TD(DANCE_2), TD(DANCE_1), TD(DANCE_3),
                     // -------
-                    MT(MOD_HYPR, KC_SPACE), OSM(MOD_RCTL), /*|----|*/ OSM(MOD_LSFT), TO(SYM)),
+                    MT(MOD_HYPR, KC_SPACE), MT(MOD_LCTL, KC_ESC), /*|----|*/ MT(MOD_LSFT, KC_ENTER), TO(SYM)),
 
     [SYM] = LAYOUT(KC_ESC, KC_DLR, KC_PERC, KC_PLUS, KC_HASH, /*|----|*/ KC_CIRC, KC_EXLM, KC_AMPR, KC_PIPE, KC_BSPC,
                    // -------
@@ -111,11 +112,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * Toggle Combo mode
      * Reboot/booload keyboard
      */
-    [OTHER] = LAYOUT(QK_RBT, QK_BOOT, XXXXXXX, QK_MAKE, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                     // -------
-                     XXXXXXX, XXXXXXX, CM_TOGG, XXXXXXX, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    [OTHER] = LAYOUT(XXXXXXX, QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                      // -------
                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                     // -------
+                     XXXXXXX, CM_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, /*|----|*/ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                      // -------
                      TO(BASE), OSM(MOD_LSFT), /*|----|*/ OSM(MOD_RCTL), TO(SYM))};
 
@@ -123,13 +124,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t PROGMEM lu_combo[] = {KC_L, KC_U, COMBO_END};
 const uint16_t PROGMEM fp_combo[] = {KC_F, KC_P, COMBO_END};
 const uint16_t PROGMEM cd_combo[] = {KC_C, KC_D, COMBO_END};
-const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
 
 combo_t key_combos[] = {
-    [LU_ESC]   = COMBO(lu_combo, KC_ESCAPE),
+    [LU_COLON] = COMBO(lu_combo, KC_COLN),
     [FP_WRITE] = COMBO(fp_combo, VIM_SAVE),
-    [CD_COLON] = COMBO(cd_combo, KC_COLN),
-    [IO_ENTER] = COMBO(io_combo, KC_ENTER),
+    [CD_TAB]   = COMBO(cd_combo, KC_TAB),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
