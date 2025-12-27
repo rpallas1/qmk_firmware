@@ -60,7 +60,7 @@ enum layers {
     OTHER,
 };
 
-enum combos { LU_COLON, FP_WRITE, CD_TAB };
+enum combos { LU_COLON, FP_WRITE, CD_TAB, NUM_COLON };
 
 enum custom_keycodes { VIM_SAVE = SAFE_RANGE };
 
@@ -86,13 +86,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                    // -------
                    KC_TAB, KC_MINS, MT(MOD_LALT, KC_EQL), LGUI_T(KC_DQUO), KC_GRAVE, /*|----|*/ KC_BSLS, KC_LCBR, KC_RCBR, KC_ASTR, KC_ENTER,
                    // -------
-                   KC_CAPS, KC_SCLN, KC_COLN, KC_QUOTE, KC_AT, /*|----|*/ KC_LBRC, KC_LPRN, KC_RPRN, KC_RBRC, TO(NAV),
+                   TO(NUM), KC_SCLN, KC_COLN, KC_QUOTE, KC_AT, /*|----|*/ KC_LBRC, KC_LPRN, KC_RPRN, KC_RBRC, TO(NAV),
                    // -------
                    TO(BASE), KC_SPACE, /*|----|*/ OSM(MOD_LSFT), TO(NUM)),
 
     [NUM] = LAYOUT(KC_ESC, KC_BRID, KC_BRIU, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, /*|----|*/ KC_PERC, KC_7, KC_8, KC_9, KC_BSPC,
                    // -------
-                   KC_TAB, KC_MEDIA_PLAY_PAUSE, MT(MOD_LALT, KC_PLUS), MT(MOD_LGUI, KC_MINS), KC_DOT, /*|----|*/ KC_EQL, KC_4, KC_5, KC_6, KC_ENTER,
+                   KC_TAB, KC_MEDIA_PLAY_PAUSE, LALT_T(KC_PLUS), MT(MOD_LGUI, KC_MINS), KC_DOT, /*|----|*/ KC_EQL, KC_4, KC_5, KC_6, KC_ENTER,
                    // -------
                    TD(PREV_NEXT), KC_MUTE, KC_ASTR, KC_SLSH, SC_SHOT_APP, /*|----|*/ KC_0, KC_1, KC_2, KC_3, TO(NAV),
                    // -------
@@ -102,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                    // ------
                    OSM(MOD_LSFT), OSM(MOD_LCTL), OSM(MOD_LALT), OSM(MOD_LGUI), XXXXXXX, /*|----|*/ KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_ENTER,
                    // ------
-                   XXXXXXX, WINDOW_SWITCH, XXXXXXX, XXXXXXX, SC_SHOT_APP, /*|----|*/ KC_HOME, XXXXXXX, XXXXXXX, KC_END, MO(OTHER),
+                   KC_CAPS, WINDOW_SWITCH, XXXXXXX, XXXXXXX, SC_SHOT_APP, /*|----|*/ KC_HOME, XXXXXXX, XXXXXXX, KC_END, MO(OTHER),
                    // ------
                    TO(BASE), KC_SPACE, /*|----|*/ KC_TAB, TO(NUM)),
 
@@ -121,14 +121,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                      TO(BASE), OSM(MOD_LSFT), /*|----|*/ OSM(MOD_RCTL), TO(SYM))};
 
 // ----- Combos -----
-const uint16_t PROGMEM lu_combo[] = {KC_L, KC_U, COMBO_END};
-const uint16_t PROGMEM fp_combo[] = {KC_F, KC_P, COMBO_END};
-const uint16_t PROGMEM cd_combo[] = {KC_C, KC_D, COMBO_END};
+const uint16_t PROGMEM lu_combo[]      = {KC_L, KC_U, COMBO_END};
+const uint16_t PROGMEM fp_combo[]      = {KC_F, KC_P, COMBO_END};
+const uint16_t PROGMEM cd_combo[]      = {KC_C, KC_D, COMBO_END};
+const uint16_t PROGMEM num_col_combo[] = {KC_7, KC_8, COMBO_END};
 
 combo_t key_combos[] = {
-    [LU_COLON] = COMBO(lu_combo, KC_COLN),
-    [FP_WRITE] = COMBO(fp_combo, VIM_SAVE),
-    [CD_TAB]   = COMBO(cd_combo, KC_TAB),
+    [LU_COLON]  = COMBO(lu_combo, KC_COLN),
+    [FP_WRITE]  = COMBO(fp_combo, VIM_SAVE),
+    [CD_TAB]    = COMBO(cd_combo, KC_TAB),
+    [NUM_COLON] = COMBO(num_col_combo, KC_COLN),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -144,6 +146,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case LGUI_T(KC_DQUO):
             if (record->tap.count && record->event.pressed) {
                 tap_code16(KC_DQUO);
+                return false;
+            }
+            break;
+        case LALT_T(KC_PLUS):
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(KC_PLUS);
                 return false;
             }
             break;
