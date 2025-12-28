@@ -91,8 +91,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                    TO(BASE), KC_SPACE, /*|----|*/ OSM(MOD_LSFT), TO(NUM)),
 
     [NUM] = LAYOUT(KC_ESC, KC_BRID, KC_BRIU, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, /*|----|*/ KC_PERC, KC_7, KC_8, KC_9, KC_BSPC,
-                   // -------
-                   KC_TAB, KC_MEDIA_PLAY_PAUSE, LALT_T(KC_PLUS), MT(MOD_LGUI, KC_MINS), KC_DOT, /*|----|*/ KC_EQL, KC_4, KC_5, KC_6, KC_ENTER,
+                   // --------
+                   KC_TAB, MT(MOD_LALT, KC_MINS), LGUI_T(KC_PLUS), KC_DOT, KC_MEDIA_PLAY_PAUSE, /*|----|*/ KC_EQL, KC_4, KC_5, KC_6, KC_ENTER,
                    // -------
                    TD(PREV_NEXT), KC_MUTE, KC_ASTR, KC_SLSH, SC_SHOT_APP, /*|----|*/ KC_0, KC_1, KC_2, KC_3, TO(NAV),
                    // -------
@@ -149,7 +149,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             break;
-        case LALT_T(KC_PLUS):
+        case LGUI_T(KC_PLUS):
             if (record->tap.count && record->event.pressed) {
                 tap_code16(KC_PLUS);
                 return false;
